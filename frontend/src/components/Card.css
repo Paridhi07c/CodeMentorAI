@@ -1,0 +1,94 @@
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  padding: var(--spacing-xl);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Variants */
+.card--default {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.card--primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  border-color: transparent;
+}
+
+.card--success {
+  background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+  color: white;
+  border-color: transparent;
+}
+
+.card--warning {
+  background: linear-gradient(135deg, var(--warning) 0%, #d97706 100%);
+  color: white;
+  border-color: transparent;
+}
+
+.card--danger {
+  background: linear-gradient(135deg, var(--error) 0%, #dc2626 100%);
+  color: white;
+  border-color: transparent;
+}
+
+.card--glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* States */
+.card--hoverable:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
+}
+
+.card--clickable {
+  cursor: pointer;
+}
+
+.card--clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+.card--clickable:active {
+  transform: translateY(0);
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .card--glass {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Card content styling */
+.card h1,
+.card h2,
+.card h3,
+.card h4,
+.card h5,
+.card h6 {
+  margin-bottom: var(--spacing-md);
+  color: inherit;
+}
+
+.card p {
+  color: inherit;
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card {
+    padding: var(--spacing-lg);
+  }
+}

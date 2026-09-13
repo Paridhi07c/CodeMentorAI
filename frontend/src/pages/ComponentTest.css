@@ -1,0 +1,15 @@
+.component-test {
+  min-height: 100vh;
+  background: var(--background);
+}
+
+.component-test h1 {
+  font-size: var(--text-4xl);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.component-test p {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+}

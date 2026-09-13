@@ -1,0 +1,72 @@
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.register-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.register-divider::before,
+.register-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.register-divider span {
+  padding: 0 16px;
+}
+
+.register-social {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.register-signin {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.register-signin a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-signin a:hover {
+  text-decoration: underline;
+}
+
+.register-terms {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.register-terms a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.register-terms a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .register-social {
+    gap: 8px;
+  }
+}

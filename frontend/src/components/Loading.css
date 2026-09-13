@@ -1,0 +1,202 @@
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
+.loading--fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--background);
+  z-index: var(--z-modal);
+}
+
+.loading--overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: var(--z-modal);
+}
+
+[data-theme="dark"] .loading--overlay {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Sizes */
+.loading--sm .loading-spinner {
+  width: 24px;
+  height: 24px;
+}
+
+.loading--md .loading-spinner {
+  width: 40px;
+  height: 40px;
+}
+
+.loading--lg .loading-spinner {
+  width: 56px;
+  height: 56px;
+}
+
+.loading--xl .loading-spinner {
+  width: 72px;
+  height: 72px;
+}
+
+/* Spinner */
+.loading-spinner {
+  position: relative;
+}
+
+.loading-spinner-circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 3px solid var(--border);
+  border-radius: 50%;
+  animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.loading-spinner-circle:nth-child(1) {
+  animation-delay: -0.45s;
+  border-color: var(--primary) transparent transparent transparent;
+}
+
+.loading-spinner-circle:nth-child(2) {
+  animation-delay: -0.3s;
+  border-color: transparent var(--primary) transparent transparent;
+}
+
+.loading-spinner-circle:nth-child(3) {
+  animation-delay: -0.15s;
+  border-color: transparent transparent var(--primary) transparent;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  margin: 0;
+}
+
+/* Loading Dots */
+.loading-dots {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+.loading-dots--sm .loading-dot {
+  width: 6px;
+  height: 6px;
+}
+
+.loading-dots--md .loading-dot {
+  width: 8px;
+  height: 8px;
+}
+
+.loading-dots--lg .loading-dot {
+  width: 12px;
+  height: 12px;
+}
+
+.loading-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--primary);
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.loading-dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* Loading Bar */
+.loading-bar {
+  background: var(--surface);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+}
+
+.loading-bar-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  animation: loadingBar 1.5s ease-in-out infinite;
+}
+
+@keyframes loadingBar {
+  0% {
+    left: -100%;
+    width: 100%;
+  }
+  50% {
+    left: 100%;
+    width: 100%;
+  }
+  100% {
+    left: 100%;
+    width: 0%;
+  }
+}
+
+/* Skeleton */
+.skeleton {
+  background: linear-gradient(90deg, var(--surface) 25%, var(--surface-hover) 50%, var(--surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+.skeleton--circle {
+  border-radius: 50%;
+}
+
+.skeleton--text {
+  height: 1em;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

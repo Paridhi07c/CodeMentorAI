@@ -1,0 +1,122 @@
+.code-editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--editor-bg, #1e1e2e);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+[data-theme="light"] .code-editor {
+  --editor-bg: #1e1e2e;
+}
+
+[data-theme="dark"] .code-editor {
+  --editor-bg: #0d1117;
+}
+
+.code-editor-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.code-editor-toolbar-left,
+.code-editor-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.code-editor-lang {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--background);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  outline: none;
+}
+
+.code-editor-lang:focus {
+  border-color: var(--primary);
+}
+
+.code-editor-filename {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.code-editor-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.code-editor-lines {
+  flex-shrink: 0;
+  width: 48px;
+  padding: var(--spacing-md) 0;
+  background: rgba(0, 0, 0, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  user-select: none;
+  text-align: right;
+}
+
+.code-editor-line-num {
+  display: block;
+  padding: 0 var(--spacing-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.code-editor-textarea {
+  flex: 1;
+  width: 100%;
+  padding: var(--spacing-md);
+  border: none;
+  background: transparent;
+  color: #e2e8f0;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  resize: none;
+  outline: none;
+  overflow: auto;
+  tab-size: 2;
+  white-space: pre;
+}
+
+.code-editor-textarea::selection {
+  background: rgba(102, 126, 234, 0.4);
+}
+
+.code-editor-textarea:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.code-editor-lines::-webkit-scrollbar,
+.code-editor-textarea::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.code-editor-lines::-webkit-scrollbar-thumb,
+.code-editor-textarea::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+}

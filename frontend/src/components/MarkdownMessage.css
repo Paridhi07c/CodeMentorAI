@@ -1,0 +1,29 @@
+.markdown-message {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.markdown-message .md-paragraph {
+  margin: 0;
+}
+
+.markdown-message .md-bold-line {
+  margin-top: var(--spacing-xs);
+}
+
+.markdown-message .md-list {
+  margin: 0;
+  padding-left: var(--spacing-lg);
+}
+
+.markdown-message .md-list li {
+  margin-bottom: var(--spacing-xs);
+}
+
+.markdown-message .code-block {
+  margin: var(--spacing-sm) 0;
+}

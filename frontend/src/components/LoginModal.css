@@ -1,0 +1,191 @@
+.login-modal .modal-header {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-bottom: none;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.login-modal .modal-body {
+  padding: 0;
+}
+
+.login-modal-content {
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-lg);
+}
+
+.login-modal-header {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.login-modal-title {
+  margin: 0 0 var(--spacing-xs);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.login-modal-subtitle {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.login-modal-tabs {
+  display: flex;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs);
+  background: var(--surface);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--spacing-lg);
+  border: 1px solid var(--border);
+}
+
+.login-modal-tab {
+  flex: 1;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.login-modal-tab:hover {
+  color: var(--text-primary);
+}
+
+.login-modal-tab--active {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.35);
+}
+
+[data-theme="dark"] .login-modal-tab--active {
+  box-shadow: 0 2px 12px rgba(102, 126, 234, 0.45);
+}
+
+.login-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.login-modal-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-sm);
+}
+
+.login-modal-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+.login-modal-checkbox input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.login-modal-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: var(--font-medium);
+  font-size: var(--text-sm);
+  transition: color var(--transition-fast);
+}
+
+.login-modal-link:hover {
+  color: var(--primary-light);
+  text-decoration: underline;
+}
+
+.login-modal-divider {
+  display: flex;
+  align-items: center;
+  margin: var(--spacing-lg) 0;
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.login-modal-divider::before,
+.login-modal-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.login-modal-divider span {
+  padding: 0 var(--spacing-md);
+}
+
+.login-modal-social {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-sm);
+}
+
+.login-modal-social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.login-modal-social-btn:hover {
+  border-color: var(--primary);
+  background: var(--surface-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.login-modal-social-btn:active {
+  transform: translateY(0);
+}
+
+[data-theme="dark"] .login-modal-social-btn {
+  background: var(--dark-surface-hover);
+}
+
+[data-theme="dark"] .login-modal-social-btn:hover {
+  border-color: var(--primary-light);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+}
+
+@media (max-width: 768px) {
+  .login-modal-content {
+    padding: var(--spacing-lg);
+  }
+
+  .login-modal-title {
+    font-size: var(--text-xl);
+  }
+}

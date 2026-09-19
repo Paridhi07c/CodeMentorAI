@@ -35,10 +35,12 @@ const Button = ({
       className={buttonClasses}
       onClick={handleClick}
       disabled={disabled || loading}
+      aria-busy={loading}
+      aria-disabled={disabled || loading}
       {...props}
     >
       {loading && (
-        <svg className="btn__spinner" fill="none" viewBox="0 0 24 24">
+        <svg className="btn__spinner" fill="none" viewBox="0 0 24 24" aria-hidden="true">
           <circle
             className="btn__spinner-circle"
             cx="12"

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
-import AppLayout from '../layouts/AppLayout.jsx'
-import CodeEditor from '../components/CodeEditor.jsx'
-import { InlineCode } from '../components/CodeBlock.jsx'
-import { PROBLEMS, DIFFICULTIES, LANGUAGES } from '../data/practiceProblems.js'
-import { runCode } from '../utils/mockCodeRunner.js'
-import { getPracticeHint, analyzeCodeComplexity } from '../services/geminiService.js'
+import AppLayout from '../layouts/AppLayout'
+import CodeEditor from '../components/CodeEditor'
+import { InlineCode } from '../components/CodeBlock'
+import { PROBLEMS, DIFFICULTIES, LANGUAGES } from '../data/practiceProblems'
+import { runCode } from '../utils/mockCodeRunner'
+import { getPracticeHint, analyzeCodeComplexity } from '../services/geminiService'
 import './PracticePage.css'
 
 const difficultyClass = (d) => d.toLowerCase()

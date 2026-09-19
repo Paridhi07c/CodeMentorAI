@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional, Any
@@ -8,10 +8,11 @@ import sqlite3
 
 app = FastAPI(title="CodeMentorAI Backend")
 
+# Allow all origins without credentials for clean local preflight handling
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
+    allow_origin_regex=r".*",
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -31,6 +32,15 @@ class CodeRunRequest(BaseModel):
 @app.get("/")
 def read_root():
     return {"status": "CodeMentorAI API is running"}
+
+# Explicit OPTIONS fallback handler to guarantee 200 OK for any browser preflight
+@app.options("/{rest_of_path:path}")
+async def preflight_handler(rest_of_path: str):
+    response = Response()
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    return response
 
 @app.post("/api/run-python")
 def run_python_code(payload: CodeRunRequest):
@@ -173,4 +183,4 @@ def run_code(payload: CodeRunRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

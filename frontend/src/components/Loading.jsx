@@ -18,13 +18,14 @@ const Loading = ({
   ].filter(Boolean).join(' ')
 
   const content = (
-    <div className={loaderClasses} {...props}>
-      <div className="loading-spinner">
+    <div className={loaderClasses} role="status" aria-live="polite" aria-busy="true" {...props}>
+      <div className="loading-spinner" aria-hidden="true">
         <div className="loading-spinner-circle"></div>
         <div className="loading-spinner-circle"></div>
         <div className="loading-spinner-circle"></div>
       </div>
       {text && <p className="loading-text">{text}</p>}
+      {!text && <span className="loading-sr-only">Loading...</span>}
     </div>
   )
 

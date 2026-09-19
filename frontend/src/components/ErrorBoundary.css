@@ -1,0 +1,93 @@
+.error-boundary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background: var(--background-primary, #ffffff);
+  color: var(--text-primary, #1a1a1a);
+}
+
+.error-boundary__content {
+  max-width: 500px;
+  text-align: center;
+}
+
+.error-boundary__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.error-boundary__message {
+  font-size: 1rem;
+  color: var(--text-secondary, #666666);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.error-boundary__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.error-boundary__button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.error-boundary__button--primary {
+  background: var(--primary-color, #3b82f6);
+  color: white;
+}
+
+.error-boundary__button--primary:hover {
+  background: var(--primary-color-dark, #2563eb);
+  transform: translateY(-1px);
+}
+
+.error-boundary__button--secondary {
+  background: var(--background-secondary, #f3f4f6);
+  color: var(--text-primary, #1a1a1a);
+}
+
+.error-boundary__button--secondary:hover {
+  background: var(--background-tertiary, #e5e7eb);
+  transform: translateY(-1px);
+}
+
+.error-boundary__details {
+  text-align: left;
+  margin-top: 2rem;
+  padding: 1rem;
+  background: var(--background-secondary, #f3f4f6);
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color, #e5e7eb);
+}
+
+.error-boundary__details summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.error-boundary__stack {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--background-tertiary, #e5e7eb);
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-family: 'Courier New', monospace;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}

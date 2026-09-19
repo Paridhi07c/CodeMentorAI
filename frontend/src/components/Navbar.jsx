@@ -40,33 +40,44 @@ const Navbar = ({
   }
 
   return (
-    <nav className={`navbar ${className}`} {...props}>
+    <nav className={`navbar ${className}`} role="navigation" aria-label="Main navigation" {...props}>
       <div className="navbar-container">
-        <div className="navbar-brand" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+        <button
+          className="navbar-brand"
+          onClick={() => navigate('/')}
+          aria-label="Go to homepage"
+        >
           <h1 className="navbar-logo">{logo}</h1>
           {tagline && <p className="navbar-tagline">{tagline}</p>}
-        </div>
+        </button>
 
-        <div className={`navbar-nav ${isMobileMenuOpen ? 'navbar-nav--open' : ''}`}>
-          <ul className="navbar-menu">
+        <div
+          className={`navbar-nav ${isMobileMenuOpen ? 'navbar-nav--open' : ''}`}
+          role="navigation"
+          aria-label="Mobile navigation"
+          aria-hidden={!isMobileMenuOpen}
+        >
+          <ul className="navbar-menu" role="menubar">
             {navItems.map((item, index) => (
-              <li key={index} className="navbar-item">
+              <li key={index} className="navbar-item" role="none">
                 {item.href?.startsWith('/') ? (
                   <Link
                     to={item.href}
                     className="navbar-link"
+                    role="menuitem"
                     onClick={() => {
                       item.onClick?.()
                       setIsMobileMenuOpen(false)
                     }}
                   >
-                    {item.icon && <span className="navbar-link-icon">{item.icon}</span>}
+                    {item.icon && <span className="navbar-link-icon" aria-hidden="true">{item.icon}</span>}
                     {item.label}
                   </Link>
                 ) : (
                   <a
                     href={item.href}
                     className="navbar-link"
+                    role="menuitem"
                     onClick={(e) => {
                       if (item.onClick) {
                         e.preventDefault()
@@ -75,7 +86,7 @@ const Navbar = ({
                       setIsMobileMenuOpen(false)
                     }}
                   >
-                    {item.icon && <span className="navbar-link-icon">{item.icon}</span>}
+                    {item.icon && <span className="navbar-link-icon" aria-hidden="true">{item.icon}</span>}
                     {item.label}
                   </a>
                 )}
@@ -89,10 +100,11 @@ const Navbar = ({
             <button
               className="navbar-action navbar-action--theme"
               onClick={toggleTheme}
-              aria-label="Toggle theme"
+              aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+              aria-pressed={isDark}
             >
               {isDark ? (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <circle cx="12" cy="12" r="5" />
                   <line x1="12" y1="1" x2="12" y2="3" />
                   <line x1="12" y1="21" x2="12" y2="23" />
@@ -104,7 +116,7 @@ const Navbar = ({
                   <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
                 </svg>
               ) : (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                 </svg>
               )}
@@ -117,9 +129,12 @@ const Navbar = ({
                 <button
                   className="navbar-action navbar-action--user"
                   onClick={toggleUserMenu}
+                  aria-expanded={isUserMenuOpen}
+                  aria-haspopup="true"
+                  aria-label={`User menu for ${user.name}`}
                 >
                   <span className="navbar-user-name">{user.name}</span>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <polyline points="6 9 12 15 18 9" />
                   </svg>
                 </button>
@@ -130,8 +145,8 @@ const Navbar = ({
               )}
 
               {isUserMenuOpen && user && (
-                <div className="navbar-dropdown">
-                  <button className="navbar-dropdown-item" onClick={onLogout}>
+                <div className="navbar-dropdown" role="menu" aria-label="User menu">
+                  <button className="navbar-dropdown-item" role="menuitem" onClick={onLogout}>
                     Logout
                   </button>
                 </div>
@@ -142,15 +157,17 @@ const Navbar = ({
           <button
             className="navbar-action navbar-action--mobile"
             onClick={toggleMobileMenu}
-            aria-label="Toggle menu"
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {isMobileMenuOpen ? (
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <line x1="18" y1="6" x2="6" y2="18" />
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             ) : (
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <line x1="3" y1="12" x2="21" y2="12" />
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <line x1="3" y1="18" x2="21" y2="18" />

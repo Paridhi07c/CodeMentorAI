@@ -13,6 +13,7 @@ const Input = ({
   icon,
   iconPosition = 'left',
   className = '',
+  id,
   ...props
 }) => {
   const inputClasses = [
@@ -30,19 +31,22 @@ const Input = ({
     }
   }
 
+  const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`
+
   return (
     <div className="input-wrapper">
       {label && (
-        <label className="input-label">
+        <label htmlFor={inputId} className="input-label">
           {label}
-          {required && <span className="input-required">*</span>}
+          {required && <span className="input-required" aria-label="required">*</span>}
         </label>
       )}
       <div className="input-container">
         {icon && iconPosition === 'left' && (
-          <span className="input-icon input-icon--left">{icon}</span>
+          <span className="input-icon input-icon--left" aria-hidden="true">{icon}</span>
         )}
         <input
+          id={inputId}
           type={type}
           className={inputClasses}
           placeholder={placeholder}
@@ -50,13 +54,19 @@ const Input = ({
           onChange={handleChange}
           disabled={disabled}
           required={required}
+          aria-invalid={!!error}
+          aria-describedby={error ? `${inputId}-error` : undefined}
           {...props}
         />
         {icon && iconPosition === 'right' && (
-          <span className="input-icon input-icon--right">{icon}</span>
+          <span className="input-icon input-icon--right" aria-hidden="true">{icon}</span>
         )}
       </div>
-      {error && <span className="input-error">{error}</span>}
+      {error && (
+        <span id={`${inputId}-error`} className="input-error" role="alert">
+          {error}
+        </span>
+      )}
     </div>
   )
 }

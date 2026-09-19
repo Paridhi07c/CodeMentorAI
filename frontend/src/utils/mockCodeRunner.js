@@ -1,5 +1,3 @@
-const BACKEND_URL = 'http://127.0.0.1:8000'
-
 const deepEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b)
 
 const cloneArgs = (args) => {
@@ -127,18 +125,19 @@ function runJavaScript(problem, code) {
 }
 
 async function runPythonBackend(problem, code) {
+  const BACKEND_URL = 'http://localhost:8000/api'
   const controller = new AbortController()
-  const timeoutId = setTimeout(() => controller.abort(), 6000)
+  const timeoutId = setTimeout(() => controller.abort(), 10000)
   const startTime = performance.now()
 
   try {
-    const response = await fetch(`${BACKEND_URL}/api/run-python`, {
+    const response = await fetch(`${BACKEND_URL}/run-code`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       signal: controller.signal,
       body: JSON.stringify({
         code: code,
-        language: 'Python',
+        language: 'python',
         function_name: problem.functionName || 'two_sum',
         test_cases: (problem.testCases || []).map(tc => ({
           input: String(tc.input ?? ''),
@@ -151,7 +150,8 @@ async function runPythonBackend(problem, code) {
     clearTimeout(timeoutId)
 
     if (!response.ok) {
-      throw new Error(`Server returned status ${response.status}`)
+      const errorData = await response.json()
+      throw new Error(errorData.detail || `Server returned status ${response.status}`)
     }
 
     const data = await response.json()
@@ -170,10 +170,10 @@ async function runPythonBackend(problem, code) {
         actual: null,
         passed: false,
         error: error.name === 'AbortError'
-          ? 'Execution timed out (6s limit).'
+          ? 'Execution timed out (10s limit).'
           : `Server unreachable: ${error.message}`,
       })),
-      logs: [`Could not connect to Python runner at ${BACKEND_URL}`],
+      logs: [`Could not connect to Python runner: ${error.message}`],
       summary: {
         passed: 0,
         total: problem.testCases?.length || 0,
@@ -185,18 +185,19 @@ async function runPythonBackend(problem, code) {
 }
 
 async function runSQLBackend(problem, code) {
+  const BACKEND_URL = 'http://localhost:8000/api'
   const controller = new AbortController()
-  const timeoutId = setTimeout(() => controller.abort(), 6000)
+  const timeoutId = setTimeout(() => controller.abort(), 10000)
   const startTime = performance.now()
 
   try {
-    const response = await fetch(`${BACKEND_URL}/api/run-sql`, {
+    const response = await fetch(`${BACKEND_URL}/run-code`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       signal: controller.signal,
       body: JSON.stringify({
         code: code,
-        language: 'SQL',
+        language: 'sql',
         schema_sql: problem.schemaSql || null,
         test_cases: (problem.testCases || []).map(tc => ({
           input: String(tc.input ?? ''),
@@ -209,7 +210,8 @@ async function runSQLBackend(problem, code) {
     clearTimeout(timeoutId)
 
     if (!response.ok) {
-      throw new Error(`Server returned status ${response.status}`)
+      const errorData = await response.json()
+      throw new Error(errorData.detail || `Server returned status ${response.status}`)
     }
 
     const data = await response.json()
@@ -228,10 +230,10 @@ async function runSQLBackend(problem, code) {
         actual: null,
         passed: false,
         error: error.name === 'AbortError'
-          ? 'Execution timed out (6s limit).'
+          ? 'Execution timed out (10s limit).'
           : `SQL runner error: ${error.message}`,
       })),
-      logs: [`Backend connection error at ${BACKEND_URL}`],
+      logs: [`Backend connection error: ${error.message}`],
       summary: {
         passed: 0,
         total: problem.testCases?.length || 0,
